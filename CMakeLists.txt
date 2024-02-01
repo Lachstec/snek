@@ -16,6 +16,8 @@ include_directories(${SDL2_INCLUDE_DIRS})
 # Add source files to project
 add_executable(snek
     src/main.cpp
+    src/game.cpp
+    src/sdl_exception.cpp
 )
 
 target_compile_features(snek PRIVATE cxx_std_23)
