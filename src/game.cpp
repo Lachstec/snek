@@ -11,7 +11,7 @@ Game::Game(int32_t width, int32_t height) noexcept(false)
         throw SdlException(SDL_GetError());
     }
     m_Renderer = SDL_CreateRenderer(m_Window, -1, SDL_RENDERER_ACCELERATED);
-    if(m_Renderer== nullptr) {
+    if(m_Renderer == nullptr) {
         throw SdlException(SDL_GetError());
     }
 }

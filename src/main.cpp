@@ -3,7 +3,7 @@
 #include "game.hpp"
 #include "sdl_exception.hpp"
 
-int main(int argc, char *argv[]) {
+int main() {
     try {
         Game game(640, 480);
         game.run();
