@@ -4,7 +4,7 @@
 
 int main() {
     try {
-        Game game(640, 480);
+        Game game(640, 640, 32, 32);
         game.run();
     } catch(const SdlException& ex) {
         std::cerr << "error initializing game: " << ex.what() << "\n";

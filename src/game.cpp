@@ -1,7 +1,7 @@
 #include "game.hpp"
 
-Game::Game(int32_t width, int32_t height) noexcept(false)
-    : m_Running(true), m_Width(width), m_Height(height)
+Game::Game(int32_t width, int32_t height, int32_t grid_width, int32_t grid_height) noexcept(false)
+    : m_Running(true), m_Width(width), m_Height(height), m_GridWidth(grid_width), m_GridHeight(grid_height)
 {
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
         throw SdlException(SDL_GetError());
