@@ -13,7 +13,8 @@ class Snake {
         void update_head();
         void update_body(SDL_Point &current_head, SDL_Point &previous_head);
         void grow_body();
-        bool check_collision(SDL_Point &current_head);
+        bool is_snakecell(int32_t x, int32_t y);
+        const std::vector<SDL_Point>& get_body() const;
     private:
         bool m_Stopped;
         bool m_Growing;
@@ -26,7 +27,7 @@ class Snake {
         float m_HeadY;
         Direction m_Direction;
         std::vector<SDL_Point> m_Body;
-        bool is_snakecell(int32_t x, int32_t y);
+        bool check_collision(SDL_Point &current_head);
 };
 
 #endif

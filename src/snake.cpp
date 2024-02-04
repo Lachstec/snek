@@ -97,3 +97,7 @@ bool Snake::is_snakecell(int32_t x, int32_t y) {
     }
     return false;
 }
+
+const std::vector<SDL_Point>& Snake::get_body() const {
+    return m_Body;
+}
