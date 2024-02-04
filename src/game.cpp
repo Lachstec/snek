@@ -1,4 +1,6 @@
 #include "game.hpp"
+#include <SDL_timer.h>
+#include <cmath>
 
 Game::Game(int32_t width, int32_t height, int32_t grid_width, int32_t grid_height) noexcept(false)
     : m_Running(true),
@@ -6,6 +8,7 @@ Game::Game(int32_t width, int32_t height, int32_t grid_width, int32_t grid_heigh
     m_Height(height),
     m_GridWidth(grid_width),
     m_GridHeight(grid_height),
+    m_Score(0),
     m_Food(SDL_Point{ .x = 0, .y = 0}),
     m_Snake(Snake(grid_width, grid_height)),
     m_Dev(),
@@ -16,7 +19,7 @@ Game::Game(int32_t width, int32_t height, int32_t grid_width, int32_t grid_heigh
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
         throw SdlException(SDL_GetError());
     }
-    m_Window = SDL_CreateWindow("snek", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_Width, m_Height, SDL_WINDOW_SHOWN);
+    m_Window = SDL_CreateWindow("Snek --- Score: 0", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_Width, m_Height, SDL_WINDOW_SHOWN);
     if(m_Window == nullptr) {
         throw SdlException(SDL_GetError());
     }
@@ -69,8 +72,8 @@ void Game::draw() {
     }
 
     // Draw Snake Head
-    rectangle.x = static_cast<int32_t>(m_Snake.get_head_x());
-    rectangle.y = static_cast<int32_t>(m_Snake.get_head_y());
+    rectangle.x = static_cast<int32_t>(m_Snake.get_head_x()) * rectangle.w;
+    rectangle.y = static_cast<int32_t>(m_Snake.get_head_y()) * rectangle.h;
     if(m_Snake.is_alive()) {
         SDL_SetRenderDrawColor(m_Renderer, 0x00, 0x7A, 0xCC, 0xFF);
     } else {
@@ -80,31 +83,43 @@ void Game::draw() {
     SDL_RenderPresent(m_Renderer);
 }
 
+void Game::update() {
+    if(!m_Snake.is_alive()) {
+        return;
+    }
+    m_Snake.update();
+    int32_t new_x = static_cast<int32_t>(m_Snake.get_head_x());
+    int32_t new_y = static_cast<int32_t>(m_Snake.get_head_y());
+    if(m_Food.x == new_x && m_Food.y == new_y) {
+        m_Score += 1;
+        generate_food();
+        m_Snake.grow_body();
+        m_Snake.set_speed(m_Snake.get_speed() + 0.02);
+    }
+}
+
+void Game::update_window_title() {
+    std::string title {"Snek --- Score: " + std::to_string(m_Score)};
+    SDL_SetWindowTitle(m_Window, title.c_str());
+}
+
 void Game::run() {
+    Uint32 frame_start;
+    Uint32 frame_end;
 
-    SDL_SetRenderDrawColor(m_Renderer, 0, 0, 0, 255);
-    SDL_RenderClear(m_Renderer);
-
-    SDL_Rect rect;
-    rect.x = 50;
-    rect.y = 50;
-    rect.h = 50;
-    rect.w = 50;
-
-    SDL_SetRenderDrawColor(m_Renderer, 255, 0, 255, 255);
-    SDL_RenderFillRect(m_Renderer, &rect);
-    SDL_RenderPresent(m_Renderer);
-
-    SDL_Event event;
     while(m_Running) {
-        while(SDL_PollEvent(&event)) {
-            switch(event.type) {
-                case SDL_QUIT:
-                    m_Running = false;
-                    break;
-                default:
-                    continue;
-            }
-        }
+
+        frame_start = SDL_GetPerformanceCounter();
+
+        m_Controller.handle_input(m_Running, m_Snake);
+        update();
+        draw();
+        update_window_title();
+
+        frame_end = SDL_GetPerformanceCounter();
+        
+
+        float elapsed = (frame_end - frame_start) / static_cast<float>(SDL_GetPerformanceFrequency());
+        SDL_Delay(floor(16.666f - elapsed));
     }
 }

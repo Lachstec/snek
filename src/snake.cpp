@@ -2,7 +2,6 @@
 
 Snake::Snake(int32_t grid_width, int32_t grid_height)
     : m_Direction(Direction::Up),
-    m_Stopped(true),
     m_Growing(false),
     m_Alive(true),
     m_GridWidth(grid_width),
@@ -32,29 +31,28 @@ void Snake::update() {
 }
 
 void Snake::update_head() {
-    if(!m_Stopped) {
-        switch(m_Direction) {
-            case Direction::Up:
-                m_HeadY -= m_Speed;
-                break;
+    switch(m_Direction) {
+        case Direction::Up:
+            m_HeadY -= m_Speed;
+            break;
 
-            case Direction::Down:
-                m_HeadY += m_Speed;
-                break;
+        case Direction::Down:
+            m_HeadY += m_Speed;
+            break;
             
-            case Direction::Left:
-                m_HeadX -= m_Speed;
-                break;
+        case Direction::Left:
+            m_HeadX -= m_Speed;
+            break;
 
-            case Direction::Right:
-                m_HeadX += m_Speed;
-                break;
-        }
-
-        // Wrap the Snake around if coordinates should exceed the grid size
-        m_HeadX = std::fmod(m_HeadX + m_GridWidth, m_GridWidth);
-        m_HeadY = std::fmod(m_HeadY + m_GridHeight, m_GridHeight);
+        case Direction::Right:
+            m_HeadX += m_Speed;
+            break;
     }
+
+    // Wrap the Snake around if coordinates should exceed the grid size
+    m_HeadX = std::fmod(m_HeadX + m_GridWidth, m_GridWidth);
+    m_HeadY = std::fmod(m_HeadY + m_GridHeight, m_GridHeight);
+    
 }
 
 void Snake::update_body(SDL_Point &current_head, SDL_Point &previous_head) {
@@ -116,4 +114,12 @@ bool Snake::is_alive() const {
 
 int32_t Snake::get_size() const {
     return m_Size;
+}
+
+float Snake::get_speed() const {
+    return m_Speed;
+}
+
+void Snake::set_speed(float new_speed) {
+    m_Speed = new_speed;
 }

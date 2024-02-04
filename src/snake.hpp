@@ -19,9 +19,10 @@ class Snake {
         int32_t get_head_x() const;
         int32_t get_head_y() const;
         int32_t get_size() const;
+        float get_speed() const;
+        void set_speed(float new_speed);
         Direction m_Direction;
     private:
-        bool m_Stopped;
         bool m_Growing;
         bool m_Alive;
         int32_t m_GridWidth;
