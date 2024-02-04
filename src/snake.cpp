@@ -84,3 +84,16 @@ bool Snake::check_collision(SDL_Point &current_head) {
     }
     return false;
 }
+
+bool Snake::is_snakecell(int32_t x, int32_t y) {
+    if(x == static_cast<int32_t>(m_HeadX) && y == static_cast<int32_t>(m_HeadY)) {
+        return true;
+    }
+
+    for(auto const &item : m_Body) {
+        if(x == item.x && y == item.y) {
+            return true;
+        }
+    }
+    return false;
+}

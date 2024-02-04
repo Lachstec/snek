@@ -25,6 +25,7 @@ class Snake {
         float m_HeadY;
         Direction m_Direction;
         std::vector<SDL_Point> m_Body;
+        bool is_snakecell(int32_t x, int32_t y);
         bool check_collision(SDL_Point &current_head);
 };
 
