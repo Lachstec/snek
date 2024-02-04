@@ -85,7 +85,7 @@ bool Snake::check_collision(SDL_Point &current_head) {
     return false;
 }
 
-bool Snake::is_snakecell(int32_t x, int32_t y) {
+bool Snake::is_snakecell(int32_t x, int32_t y) const {
     if(x == static_cast<int32_t>(m_HeadX) && y == static_cast<int32_t>(m_HeadY)) {
         return true;
     }
@@ -100,4 +100,16 @@ bool Snake::is_snakecell(int32_t x, int32_t y) {
 
 const std::vector<SDL_Point>& Snake::get_body() const {
     return m_Body;
+}
+
+int32_t Snake::get_head_x() const {
+    return m_HeadX;
+}
+
+int32_t Snake::get_head_y() const {
+    return m_HeadY;
+}
+
+bool Snake::is_alive() const {
+    return m_Alive;
 }

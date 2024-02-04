@@ -18,6 +18,7 @@ add_executable(snek
     src/main.cpp
     src/game.cpp
     src/sdl_exception.cpp
+    src/snake.cpp
 )
 
 target_compile_features(snek PRIVATE cxx_std_23)

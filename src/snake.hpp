@@ -13,8 +13,11 @@ class Snake {
         void update_head();
         void update_body(SDL_Point &current_head, SDL_Point &previous_head);
         void grow_body();
-        bool is_snakecell(int32_t x, int32_t y);
+        bool is_snakecell(int32_t x, int32_t y) const;
+        bool is_alive() const;
         const std::vector<SDL_Point>& get_body() const;
+        int32_t get_head_x() const;
+        int32_t get_head_y() const;
     private:
         bool m_Stopped;
         bool m_Growing;
