@@ -1,7 +1,8 @@
 #include "snake.hpp"
 
 Snake::Snake(int32_t grid_width, int32_t grid_height)
-    : m_Stopped(true),
+    : m_Direction(Direction::Up),
+    m_Stopped(true),
     m_Growing(false),
     m_Alive(true),
     m_GridWidth(grid_width),
@@ -9,8 +10,7 @@ Snake::Snake(int32_t grid_width, int32_t grid_height)
     m_Size(1),
     m_Speed(0.1f),
     m_HeadX(static_cast<float>(grid_width) / 2),
-    m_HeadY(static_cast<float>(grid_height) / 2),
-    m_Direction(Direction::Up)
+    m_HeadY(static_cast<float>(grid_height) / 2)
 {
 
 }
@@ -112,4 +112,8 @@ int32_t Snake::get_head_y() const {
 
 bool Snake::is_alive() const {
     return m_Alive;
+}
+
+int32_t Snake::get_size() const {
+    return m_Size;
 }

@@ -18,6 +18,8 @@ class Snake {
         const std::vector<SDL_Point>& get_body() const;
         int32_t get_head_x() const;
         int32_t get_head_y() const;
+        int32_t get_size() const;
+        Direction m_Direction;
     private:
         bool m_Stopped;
         bool m_Growing;
@@ -28,7 +30,6 @@ class Snake {
         float m_Speed;
         float m_HeadX;
         float m_HeadY;
-        Direction m_Direction;
         std::vector<SDL_Point> m_Body;
         bool check_collision(SDL_Point &current_head);
 };
