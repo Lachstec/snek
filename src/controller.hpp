@@ -6,5 +6,5 @@ class Controller {
     public:
         void handle_input(bool &running, Snake &snake) const;
     private:
-        void change_direction(Snake &snake, Snake::Direction direction, Snake::Direction opposite) const;
+        void change_direction(Snake &snake, Direction direction, Direction opposite) const;
 };

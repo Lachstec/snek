@@ -100,26 +100,14 @@ const std::vector<SDL_Point>& Snake::get_body() const {
     return m_Body;
 }
 
-int32_t Snake::get_head_x() const {
-    return m_HeadX;
-}
+const float& Snake::get_head_x() const { return m_HeadX; }
 
-int32_t Snake::get_head_y() const {
-    return m_HeadY;
-}
+const float& Snake::get_head_y() const { return m_HeadY; }
 
-bool Snake::is_alive() const {
-    return m_Alive;
-}
+bool Snake::is_alive() const { return m_Alive; }
 
-int32_t Snake::get_size() const {
-    return m_Size;
-}
+const int32_t& Snake::get_size() const { return m_Size; }
 
-float Snake::get_speed() const {
-    return m_Speed;
-}
+const float& Snake::get_speed() const { return m_Speed; }
 
-void Snake::set_speed(float new_speed) {
-    m_Speed = new_speed;
-}
+void Snake::set_speed(float new_speed) { m_Speed = new_speed; }
