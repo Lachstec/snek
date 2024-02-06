@@ -1,5 +1,4 @@
-#ifndef SDL_EXCEPTION
-#define SDL_EXCEPTION
+#pragma once
 #include <exception>
 
 class SdlException : std::exception  {
@@ -9,5 +8,3 @@ class SdlException : std::exception  {
     private:
         const char* m_Message;
 };
-
-#endif

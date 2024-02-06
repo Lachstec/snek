@@ -1,5 +1,4 @@
-#ifndef SNAKE_H
-#define SNAKE_H
+#pragma once
 #include <cstdint>
 #include <cmath>
 #include <vector>
@@ -30,5 +29,3 @@ class Snake {
         void update_head();
         void update_body(SDL_Point &current_head, SDL_Point &previous_head);
 };
-
-#endif

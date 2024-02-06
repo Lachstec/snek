@@ -1,5 +1,4 @@
-#ifndef GAME_H
-#define GAME_H
+#pragma once
 #include <cstdint>
 #include <random>
 #include <string>
@@ -29,5 +28,3 @@ class Game {
         void update();
         void update_window_title();
 };
-
-#endif
