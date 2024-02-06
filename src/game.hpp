@@ -7,6 +7,7 @@
 #include "sdl_exception.hpp"
 #include "snake.hpp"
 #include "controller.hpp"
+#include "fruit.hpp"
 
 
 class Game {
@@ -16,23 +17,16 @@ class Game {
         void run();
     private:
         bool m_Running;
-        const int32_t m_Width;
-        const int32_t m_Height;
-        const int32_t m_GridWidth;
-        const int32_t m_GridHeight;
+        const int32_t m_Width, m_Height, m_GridWidth, m_GridHeight;
         int32_t m_Score;
         SDL_Window *m_Window;
         SDL_Renderer *m_Renderer;
         SDL_Point m_Food;
         Snake m_Snake;
-        std::random_device m_Dev;
-        std::mt19937 m_Gen;
-        std::uniform_int_distribution<int32_t> m_Random_w;
-        std::uniform_int_distribution<int32_t> m_Random_h;
+        Fruit m_FoodGen;
         Controller m_Controller;
         void draw();
         void update();
-        void generate_food();
         void update_window_title();
 };
 

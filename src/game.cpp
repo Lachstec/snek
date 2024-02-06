@@ -11,10 +11,7 @@ Game::Game(int32_t width, int32_t height, int32_t grid_width, int32_t grid_heigh
     m_Score(0),
     m_Food(SDL_Point{ .x = 0, .y = 0}),
     m_Snake(Snake(grid_width, grid_height)),
-    m_Dev(),
-    m_Gen(m_Dev()),
-    m_Random_w(0, static_cast<int32_t>(grid_width) - 1),
-    m_Random_h(0, static_cast<int32_t>(grid_height) - 1)
+    m_FoodGen(Fruit(m_GridWidth, m_GridHeight, m_Snake))
 {
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
         throw SdlException(SDL_GetError());
@@ -33,19 +30,6 @@ Game::~Game() {
     SDL_DestroyRenderer(m_Renderer);
     SDL_DestroyWindow(m_Window);
     SDL_Quit();
-}
-
-void Game::generate_food() {
-    int32_t x, y;
-    while(true) {
-        x = m_Random_w(m_Gen);
-        y = m_Random_h(m_Gen);
-        if(!m_Snake.is_snakecell(x, y)) {
-            m_Food.x = x;
-            m_Food.y = y;
-            return;
-        }
-    }
 }
 
 void Game::draw() {
@@ -92,7 +76,7 @@ void Game::update() {
     int32_t new_y = static_cast<int32_t>(m_Snake.get_head_y());
     if(m_Food.x == new_x && m_Food.y == new_y) {
         m_Score += 1;
-        generate_food();
+        m_FoodGen.generate_fruit(m_Food);
         m_Snake.grow_body();
         m_Snake.set_speed(m_Snake.get_speed() + 0.02);
     }

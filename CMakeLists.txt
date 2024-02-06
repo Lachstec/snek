@@ -20,6 +20,7 @@ add_executable(snek
     src/sdl_exception.cpp
     src/snake.cpp
     src/controller.cpp
+    src/fruit.cpp
 )
 
 target_compile_features(snek PRIVATE cxx_std_23)
