@@ -1,7 +1,5 @@
 #pragma once
 #include <cstdint>
-#include <random>
-#include <string>
 #include <SDL2/SDL.h>
 #include "sdl_exception.hpp"
 #include "snake.hpp"

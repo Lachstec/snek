@@ -1,6 +1,4 @@
 #include "game.hpp"
-#include <SDL_timer.h>
-#include <cmath>
 
 Game::Game(int32_t width, int32_t height, int32_t grid_width, int32_t grid_height) noexcept(false)
     : m_Running(true),
